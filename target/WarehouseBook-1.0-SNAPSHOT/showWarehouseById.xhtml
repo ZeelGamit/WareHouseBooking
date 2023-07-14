@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+
+        <link type="text/css" rel="stylesheet" href="/JavaServerFaces/faces/javax.faces.resources/primeflex.css?ln=css"/>
+        <link href="sidebar.xhtml" />
+        <link rel="stylesheet" href="https://unpkg.com/primeflex@^3/primeflex.css"/>
+
+        <style>
+            .product-item .product-item-content {
+
+                margin: .3rem;
+                text-align: center;
+                padding: 2rem 0;
+            }
+
+            .product-content{
+                text-align: left;
+                padding-left: 10rem;
+            }
+
+            .product-item .product-image {
+                width: 30%;
+                box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+            }
+        </style>
+
+    </h:head>
+    <h:body>
+        <div style="height: 97vh;
+             display: flex;
+             justify-content: center;
+             align-items: center;">
+            <f:view>
+                <h:form>
+                    <div class="card w-fit mr-auto ml-auto" style="box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); border: none">
+                        <div class="product-item">
+                            <div class="product-item-content">
+                                <div class="mb-2">
+                                    <img alt="user header" class="p-2" style="width: 20%;box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);" src="serviceImages/#{warehouseBookBean.serviceincluded.provideServiceId.serviceId.servicePicture}" />
+                                </div>
+                                <div class="product-content">
+                                    <h4 class="mt-0 mb-2">
+                                        <p:outputLabel class="text-xl text-blue-600">Construction type: </p:outputLabel>
+                                        <p:outputLabel value="#{warehouseBookBean.serviceincluded.warehouseId.constructionTypeId.constructionType}" />
+                                    </h4>
+                                    <h4 class="mt-0 mb-2">
+                                        <p:outputLabel class="text-xl text-blue-600">Amenities: </p:outputLabel>
+                                        <ui:repeat var="amenity" value="#{warehouseBookBean.amenitiesOfWarehouse}">
+                                            <p:outputLabel>#{amenity.amenityId.amenityName} ,</p:outputLabel>
+                                        </ui:repeat>
+                                    </h4>
+                                    <h4 class="mt-0 mb-2">
+                                        <p:outputLabel class="text-xl text-blue-600"> Compliances: </p:outputLabel>
+                                        <ui:repeat var="compliences" value="#{warehouseBookBean.compliancesOfWarehouse}">
+                                            <p:outputLabel>#{compliences.compliencesId.compliancName} ,</p:outputLabel>
+                                        </ui:repeat>
+                                    </h4>
+
+                                    <h4 class="mt-0 mb-2">
+                                        <p:outputLabel class="text-xl text-blue-600"> Product type: </p:outputLabel>
+                                        <ui:repeat var="product" value="#{warehouseBookBean.productTypesOfWarehouse}">
+                                            <p:outputLabel>#{product.productTypeId.productType} ,</p:outputLabel>
+                                        </ui:repeat>
+                                    </h4>
+
+                                    <h4 class="mt-0 mb-2">
+                                        <p:outputLabel class="text-xl text-blue-600"> Area: </p:outputLabel>
+                                        <p:outputLabel value="#{warehouseBookBean.serviceincluded.warehouseId.area} sq/ft" />
+                                    </h4>
+
+                                    <h4 class="mt-0 mb-2">
+                                        <p:outputLabel class="text-xl text-blue-600"> Location: </p:outputLabel>
+                                        <p:outputLabel value="#{warehouseBookBean.serviceincluded.warehouseId.locationId.locationName}, " />
+                                        <p:outputLabel value="#{warehouseBookBean.serviceincluded.warehouseId.locationId.cityId.cityName}" />
+                                    </h4>
+
+                                    <h4 class="mt-0 mb-2">
+                                        <p:outputLabel class="text-xl text-blue-600"> Price </p:outputLabel>
+                                        <p:outputLabel value="#{warehouseBookBean.serviceincluded.price}" />
+                                    </h4>
+                                    <div class="flex-1">
+                                        <p:commandButton class="flex-1 justify-content-between" value="Book now" oncomplete="PF('manageProductDialog').show()" process="@this" styleClass="ui-button-primary" />
+                                        <p:commandButton class="flex-1 justify-content-between" icon="pi pi-angle-left" action="#{warehouseBookBean.goTOShowActiveWarehouses()}" value="Back" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </f:view>
+        </div>
+
+        <h:form id="dialogs">
+            <p:dialog header="Select Dates" widgetVar="manageProductDialog" hideEffect="fade" responsive="true" width="1005" showEffect="fade">
+                <div class="ui-fluid p-3">
+                    <p:outputLabel for="range" class="text-lg text-lg font-bold" value="Startdate- Enddate"/>
+                    <p:datePicker id="range" selectionMode="range" value="#{warehouseBookBean.range}" readonlyInput="true"/>
+                </div>
+                <f:facet name="footer">
+                    <p:commandButton icon="pi pi-check" value="Book" action="#{warehouseBookBean.doBookWarehouse()}" update="@this"/>
+                    <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageProductDialog').hide()"
+                                     class="ui-button-secondary" type="button" />
+                </f:facet>
+            </p:dialog>
+        </h:form>
+
+    </h:body>
+</html>
+

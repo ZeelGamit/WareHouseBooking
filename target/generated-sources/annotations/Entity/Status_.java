@@ -1,0 +1,18 @@
+package Entity;
+
+import Entity.Serviceincluded;
+import javax.annotation.processing.Generated;
+import javax.persistence.metamodel.CollectionAttribute;
+import javax.persistence.metamodel.SingularAttribute;
+import javax.persistence.metamodel.StaticMetamodel;
+
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2023-06-18T01:07:43", comments="EclipseLink-2.7.9.v20210604-rNA")
+@StaticMetamodel(Status.class)
+public class Status_ { 
+
+    public static volatile SingularAttribute<Status, Integer> statusId;
+    public static volatile SingularAttribute<Status, String> statusName;
+    public static volatile CollectionAttribute<Status, Serviceincluded> serviceincludedCollection;
+    public static volatile SingularAttribute<Status, Short> status;
+
+}

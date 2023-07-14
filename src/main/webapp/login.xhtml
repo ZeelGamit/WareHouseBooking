@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="primeflex.css" />
+        <link type="text/css" rel="stylesheet" href="./JavaServerFaces/faces/javax.faces.resources/primeflex.css?ln=css"/>
+    </h:head>
+     <h:body class="bg-auto">
+        <div class="flex font-bold border-round mt-8"> 
+            <p:card class="w-30rem ml-auto mr-auto bg-blue-100">
+                <h1>SIGN IN</h1>
+                <h:form>
+                    <div class="ui-fluid">
+                        <div class="field">
+                            <p:outputLabel for="username" value="Username" />
+                            <p:inputText id="username" />
+                        </div>
+                        <div class="field">
+                            <p:outputLabel for="password" value="Password" />
+                            <p:password id="password" />
+                        </div>
+                    </div>
+                    <div class="w-20rem">
+                        <p:commandButton value="Login" styleClass="ui-button-secondary w-28rem font-bold" action="#{warehouseBookBean.goToUserHome()}"/>
+                    </div>
+                </h:form>
+            </p:card>
+        </div>
+    </h:body>
+</html>
+

@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="primeflex.css" />
+        <link type="text/css" rel="stylesheet" href="/JavaServerFaces/faces/javax.faces.resources/primeflex.css?ln=css"/>  
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="https://unpkg.com/primeflex@^3/primeflex.css"/>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form enctype="multipart/form-data">
+                <div class="card m-8 p-3 bg-white-alpha-30 border-round-lg">
+                    <div class="card-container ">
+                        <div class="ui-fluid">
+                            <div class= "flex card-container">
+                                <div class="flex-1 card-container">
+                                    <p:outputLabel value="Firstname:" /> 
+                                    <p:inputText value="#{warehouseBookBean.firstname}" /><br/><br/>
+                                </div>
+                                <div class="flex-1 card-container">
+                                    <p:outputLabel value="Lastname" /> 
+                                    <p:inputText value="#{warehouseBookBean.lastname}" /><br/><br/>
+                                </div>
+                            </div>
+                            <p:outputLabel value="Email" /> 
+                            <p:inputText value="#{warehouseBookBean.email}" /><br/><br/>
+                            <p:outputLabel value="Phone:" /> 
+                            <p:inputText value="#{warehouseBookBean.phone}" /><br/><br/>
+                            <p:outputLabel value="Password:" /> 
+                            <p:inputText value="#{warehouseBookBean.password}" /><br/><br/>
+                            <p:outputLabel value="Locality" /> 
+                            <p:inputText value="#{warehouseBookBean.locality}" /><br/><br/>
+                            <p:outputLabel value="City" /> 
+                            <p:selectOneMenu value="#{warehouseBookBean.selectedCity}">
+                                <f:selectItem itemLabel="Select one.." itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{warehouseBookBean.allCities}" var="c" itemLabel="#{c.cityName}" itemValue="#{c.cityId}"/>
+                            </p:selectOneMenu><br/><br/>                
+                            <p:outputLabel value="Construction Type" /> 
+                            <p:selectOneMenu value="#{warehouseBookBean.selectedConstructionType}">
+                                <f:selectItem itemLabel="Select one.." itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{warehouseBookBean.allConstructioType}" var="c" itemLabel="#{c.constructionType}" itemValue="#{c.constructionId}"/>
+                            </p:selectOneMenu><br/><br/>
+                            <p:outputLabel value="Area" /> 
+                            <p:inputText value="#{warehouseBookBean.area}" /><br/><br/>
+                            <p:outputLabel value="Amenity" />
+                            <p:selectManyCheckbox value="#{warehouseBookBean.selectedAmenities}" label="amenity">
+                                <f:selectItems value="#{warehouseBookBean.allAmenities}" var="a" itemLabel="#{a.amenityName}" itemValue="#{a.amenityId}"/>
+                            </p:selectManyCheckbox>
+                            <br/><br/>
+                            <p:outputLabel value="Compliences" />
+                            <p:selectManyCheckbox value="#{warehouseBookBean.selectedCompliances}" label="Compliences">
+                                <f:selectItems value="#{warehouseBookBean.allCompliances}" var="c" itemLabel="#{c.compliancName}" itemValue="#{c.compliancesId}"/>
+                            </p:selectManyCheckbox><!-- comment -->
+                            <br/><br/>
+                            <p:outputLabel value="Product type" />
+                            <p:selectManyCheckbox value="#{warehouseBookBean.selectedProductType}" label="productType">
+                                <f:selectItems value="#{warehouseBookBean.allProductType}" var="p" itemLabel="#{p.productType}" itemValue="#{p.productTypeId}"/>
+                            </p:selectManyCheckbox>
+                            <br/><br/>
+
+                            <p:outputLabel value="Image" />
+                            <p:fileUpload mode="simple" skinSimple="true" allowTypes="/(gif|png|jpg|jpeg)$/" value="#{warehouseBookBean.file}" />
+                            <br/><br/><!-- comment -->
+
+                            <p:outputLabel value="Price" />
+                            <p:inputText value="#{warehouseBookBean.price}" />
+                        </div>
+                        <br/>
+                        <p:commandButton type="submit" action="#{warehouseBookBean.doOwnerRegistration()}" onclick="Windows.location.load()" value="Register"  />
+
+                        <br/><br/>
+                        <p:commandLink type="submit" action="#{warehouseBookBean.goToLogin()}" value="Login!" />
+                    </div>
+                </div>
+            </h:form>
+        </f:view>
+    </h:body>
+</html>
+

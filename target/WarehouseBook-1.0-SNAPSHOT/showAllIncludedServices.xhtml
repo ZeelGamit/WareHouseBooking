@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="primeflex.css" />
+        <link type="text/css" rel="stylesheet" href="./JavaServerFaces/faces/javax.faces.resources/primeflex.css?ln=css"/>
+        <link rel="stylesheet" href="https://unpkg.com/primeflex@^3/primeflex.css"/>
+    </h:head>
+    <h:body>
+        <f:view>
+            <div class="card crud-demo">
+                <h:form id="form">
+                    <h1><h:outputText value="List"/></h1>
+                    <h:dataTable value="#{warehouseBookBean.allIncludedServices}" var="item">
+                        <h:column>   
+                            <f:facet name="header">
+                                <h:outputText value="ServiceIncludedId"/>
+                            </f:facet>
+                            <h:outputText value="#{item.serviceIncludedId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Price"/>
+                            </f:facet>
+                            <h:outputText value="#{item.price}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="ProvideServiceId"/>
+                            </f:facet>
+                            <h:outputText value="#{item.provideServiceId.serviceId.serviceName}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="CurrentStatusId"/>
+                            </f:facet>
+                            <h:outputText value="#{item.currentStatusId.statusName}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="WarehouseId"/>
+                            </f:facet>
+                            <h:outputText value="#{item.warehouseId.warehouseId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value=""/>
+                            </f:facet>
+                            <h:commandButton value="Active service" action="#{warehouseBookBean.doEditIncludedService(item)}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </div>
+        </f:view>
+    </h:body>
+</html>
+
